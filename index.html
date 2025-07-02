@@ -111,12 +111,12 @@
       text-shadow: 0 0 10px #ff4444;
     }
 
-    /* Notification styles with slide animation */
+    /* Notification styles with transform slide */
     #notification {
       position: fixed;
-      top: -80px; /* hidden above the viewport */
+      top: 20px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, -100%);
       background: #222;
       color: white;
       padding: 15px 25px;
@@ -124,11 +124,13 @@
       box-shadow: 0 0 10px #00ff88;
       font-size: 18px;
       z-index: 1000;
-      transition: top 0.5s ease;
+      transition: transform 0.5s ease;
+      pointer-events: none;
     }
 
     #notification.show {
-      top: 20px; /* visible position */
+      transform: translate(-50%, 0);
+      pointer-events: auto;
     }
   </style>
 </head>
