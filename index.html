@@ -168,14 +168,14 @@
   </style>
 </head>
 <body>
-  <!-- ✅ Navigation Tabs -->
+  <!-- 🔷 Navigation Tabs -->
   <div class="nav-bar">
     <a href="#faq">FAQ</a>
     <a href="#purchase">Purchase</a>
-    <a href="https://discord.gg/mNzVJdEdTS" target="_blank">Discord</a>
+    <a href="https://discord.gg/YOUR_INVITE_HERE" target="_blank">Discord</a>
   </div>
 
-  <!-- Page Content Spacer for nav -->
+  <!-- Spacer for nav -->
   <div style="margin-top: 80px;"></div>
 
   <!-- Status -->
@@ -208,15 +208,14 @@
     <p class="description">Coming soon... Got questions? Ask in our Discord server!</p>
   </div>
 
-  <!-- Purchase Section -->
-<div id="purchase" style="margin-top: 100px; padding-top: 100px;">
-  <h2 class="glow">Purchase</h2>
-  <p class="description">Support the Verdance project by purchasing access below:</p>
-  <a href="https://www.roblox.com/game-pass/1258250867/Verdance" target="_blank">
-    <button class="button" style="margin-top: 20px;">Purchase on Roblox</button>
-  </a>
-</div>
-
+  <!-- ✅ Purchase Section with Button -->
+  <div id="purchase" style="margin-top: 100px; padding-top: 100px;">
+    <h2 class="glow">Purchase</h2>
+    <p class="description">Support the Verdance project by purchasing access below:</p>
+    <a href="https://www.roblox.com/game-pass/1258250867/Verdance" target="_blank">
+      <button class="button" style="margin-top: 20px;">Purchase on Roblox</button>
+    </a>
+  </div>
 
   <!-- Footer -->
   <div class="footer" style="margin-top: 80px; font-size: 14px; color: #444;">
@@ -233,14 +232,12 @@
     const statusDiv = document.getElementById('status');
 
     window.addEventListener('DOMContentLoaded', () => {
-      // Set initial status
       if (downloadLink.href.includes('YOUR_MOD_LINK_HERE')) {
         setStatus('hammer', 'Menu Status: 🔨');
       } else {
         setStatus('green', 'Menu Status: 🟢');
       }
 
-      // Notification on dev link
       downloadLink.addEventListener('click', function (e) {
         if (downloadLink.href.includes('YOUR_MOD_LINK_HERE')) {
           e.preventDefault();
@@ -252,10 +249,9 @@
     function showNotification(message) {
       notification.textContent = message;
       notification.classList.add('show');
-
       setTimeout(() => {
         notification.classList.remove('show');
-      }, 3000); // visible for 3s
+      }, 3000);
     }
 
     function setStatus(statusClass, text) {
