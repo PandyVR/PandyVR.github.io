@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Verdance Mod Menu</title>
+<style>
+  body {
+    background: black;
+    color: #00ff88;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 100px 20px;
+  }
+  h1 {
+    font-size: 50px;
+    text-shadow: 0 0 20px #00ff88;
+    margin-bottom: 40px;
+  }
+  button {
+    font-size: 20px;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 15px;
+    background-color: #00ff88;
+    color: black;
+    cursor: pointer;
+    box-shadow: 0 0 15px #00ff88, 0 0 30px #00ff88;
+    animation: pulse 1.5s infinite;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: white;
+  }
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 0 15px #00ff88, 0 0 30px #00ff88;
+    }
+    50% {
+      box-shadow: 0 0 30px #00ff88, 0 0 60px #00ff88;
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>Verdance Mod Menu</h1>
+<button id="downloadBtn">Download Verdance</button>
+
+<script>
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    const modLink = "YOUR_MOD_LINK_HERE"; // Replace with your mod URL
+
+    if (modLink !== "YOUR_MOD_LINK_HERE" && modLink.trim() !== "") {
+      window.location.href = modLink;
+    } else {
+      alert("Mod link is not set yet.");
+    }
+  });
+</script>
+
+</body>
+</html>
