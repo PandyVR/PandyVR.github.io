@@ -111,13 +111,13 @@
       text-shadow: 0 0 10px #ff4444;
     }
 
-    /* Notification styles with transform slide */
+    /* Notification styles with fade + slide */
     #notification {
-      display: none; /* hidden by default */
       position: fixed;
       top: 20px;
       left: 50%;
-      transform: translate(-50%, -100%);
+      transform: translate(-50%, -20px);
+      opacity: 0;
       background: #222;
       color: white;
       padding: 15px 25px;
@@ -125,12 +125,14 @@
       box-shadow: 0 0 10px #00ff88;
       font-size: 18px;
       z-index: 1000;
-      transition: transform 0.5s ease;
       pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      display: none;
     }
 
     #notification.show {
       display: block;
+      opacity: 1;
       transform: translate(-50%, 0);
       pointer-events: auto;
     }
@@ -166,6 +168,11 @@
     const notification = document.getElementById('notification');
     const statusDiv = document.getElementById('status');
 
+    // Hide notification immediately on page load to prevent flash
+    window.addEventListener('DOMContentLoaded', () => {
+      notification.style.display = 'none';
+    });
+
     // Show notification if download link is default placeholder
     downloadLink.addEventListener('click', function (e) {
       if (downloadLink.href.includes('YOUR_MOD_LINK_HERE')) {
@@ -174,19 +181,17 @@
       }
     });
 
-    // Function to show notification with slide animation
+    // Function to show notification with slide + fade animation
     function showNotification(message) {
       notification.textContent = message;
-      notification.style.display = 'block';  // make visible immediately
-      // force reflow so animation triggers
-      void notification.offsetWidth;
-      notification.classList.add('show');  // slide down visible
+      notification.classList.add('show');
 
       setTimeout(() => {
-        notification.classList.remove('show'); // slide back up hidden
+        notification.classList.remove('show');
+
         setTimeout(() => {
-          notification.style.display = 'none'; // hide completely after slide up
-        }, 500); // match CSS transition duration
+          notification.style.display = 'none';
+        }, 500); // match CSS transition time
       }, 3000);
     }
 
