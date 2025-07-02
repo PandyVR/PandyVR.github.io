@@ -15,6 +15,34 @@
       overflow-x: hidden;
     }
 
+    /* 🔷 Navigation Tabs */
+    .nav-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 15px 0;
+      box-shadow: 0 0 10px #00ff88;
+      z-index: 999;
+    }
+
+    .nav-bar a {
+      color: #00ff88;
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    .nav-bar a:hover {
+      color: white;
+      text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+    }
+
     /* Glow styles */
     .glow {
       font-size: 54px;
@@ -111,7 +139,7 @@
       text-shadow: 0 0 10px #ff4444;
     }
 
-    /* ✅ Fixed Notification: fade + slide */
+    /* Notification styles */
     #notification {
       position: fixed;
       top: 20px;
@@ -140,30 +168,61 @@
   </style>
 </head>
 <body>
+  <!-- ✅ Navigation Tabs -->
+  <div class="nav-bar">
+    <a href="#faq">FAQ</a>
+    <a href="#purchase">Purchase</a>
+    <a href="https://discord.gg/YOUR_INVITE_HERE" target="_blank">Discord</a>
+  </div>
+
+  <!-- Page Content Spacer for nav -->
+  <div style="margin-top: 80px;"></div>
+
+  <!-- Status -->
   <div id="status" class="glow hammer">Menu Status: 🔨</div>
 
+  <!-- Title -->
   <div class="glow">Verdance Mod Menu</div>
+
+  <!-- Description -->
   <div class="description">
     Welcome to the official page for <strong>Verdance</strong>, the custom mod menu for Gorilla Tag.<br />
     Download the latest version below and enjoy powerful tools made for fun and exploration.
   </div>
 
+  <!-- Download Button -->
   <a href="YOUR_MOD_LINK_HERE" id="download-link" download>
     <button class="button">Download Verdance</button>
   </a>
 
+  <!-- Status Meanings -->
   <div class="status-meanings">
     <div><span class="hammer">🔨</span> Developing</div>
     <div><span class="green">🟢</span> Online</div>
     <div><span class="red">🔴</span> Detected</div>
   </div>
 
+  <!-- FAQ Section -->
+  <div id="faq" style="margin-top: 100px; padding-top: 100px;">
+    <h2 class="glow">FAQ</h2>
+    <p class="description">Coming soon... Got questions? Ask in our Discord server!</p>
+  </div>
+
+  <!-- Purchase Section -->
+  <div id="purchase" style="margin-top: 100px; padding-top: 100px;">
+    <h2 class="glow">Purchase</h2>
+    <p class="description">Purchasing is not available yet. Stay tuned in Discord!</p>
+  </div>
+
+  <!-- Footer -->
   <div class="footer" style="margin-top: 80px; font-size: 14px; color: #444;">
     © 2025 Verdance Team | Not affiliated with Another Axiom or Gorilla Tag
   </div>
 
+  <!-- Notification -->
   <div id="notification"></div>
 
+  <!-- Script -->
   <script>
     const downloadLink = document.getElementById('download-link');
     const notification = document.getElementById('notification');
@@ -177,7 +236,7 @@
         setStatus('green', 'Menu Status: 🟢');
       }
 
-      // Notification click
+      // Notification on dev link
       downloadLink.addEventListener('click', function (e) {
         if (downloadLink.href.includes('YOUR_MOD_LINK_HERE')) {
           e.preventDefault();
