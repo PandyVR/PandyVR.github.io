@@ -111,9 +111,10 @@
       text-shadow: 0 0 10px #ff4444;
     }
 
+    /* Notification styles with slide animation */
     #notification {
       position: fixed;
-      top: 20px;
+      top: -80px; /* hidden above the viewport */
       left: 50%;
       transform: translateX(-50%);
       background: #222;
@@ -122,8 +123,12 @@
       border-radius: 8px;
       box-shadow: 0 0 10px #00ff88;
       font-size: 18px;
-      display: none;
       z-index: 1000;
+      transition: top 0.5s ease;
+    }
+
+    #notification.show {
+      top: 20px; /* visible position */
     }
   </style>
 </head>
@@ -161,16 +166,17 @@
     downloadLink.addEventListener('click', function (e) {
       if (downloadLink.href.includes('YOUR_MOD_LINK_HERE')) {
         e.preventDefault();
-        showNotification('Menu is in development Come Back Later');
+        showNotification('Menu is in development');
       }
     });
 
-    // Function to show notification message
+    // Function to show notification with slide animation
     function showNotification(message) {
       notification.textContent = message;
-      notification.style.display = 'block';
+      notification.classList.add('show');  // slide down visible
+
       setTimeout(() => {
-        notification.style.display = 'none';
+        notification.classList.remove('show'); // slide back up hidden
       }, 3000);
     }
 
