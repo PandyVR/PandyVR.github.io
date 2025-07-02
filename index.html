@@ -1,63 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Verdance Mod Menu</title>
-<style>
-  body {
-    background: black;
-    color: #00ff88;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 100px 20px;
-  }
-  h1 {
-    font-size: 50px;
-    text-shadow: 0 0 20px #00ff88;
-    margin-bottom: 40px;
-  }
-  button {
-    font-size: 20px;
-    padding: 15px 40px;
-    border: none;
-    border-radius: 15px;
-    background-color: #00ff88;
-    color: black;
-    cursor: pointer;
-    box-shadow: 0 0 15px #00ff88, 0 0 30px #00ff88;
-    animation: pulse 1.5s infinite;
-    transition: background-color 0.3s;
-  }
-  button:hover {
-    background-color: white;
-  }
-  @keyframes pulse {
-    0%, 100% {
-      box-shadow: 0 0 15px #00ff88, 0 0 30px #00ff88;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verdance Mod Menu</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      overflow-x: hidden;
     }
-    50% {
-      box-shadow: 0 0 30px #00ff88, 0 0 60px #00ff88;
+
+    /* Pulsing glow for status and main title */
+    .glow {
+      font-size: 54px;
+      color: #00ff88;
+      text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 40px #00ff88;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      animation: pulse 1.5s infinite;
     }
-  }
-</style>
+
+    /* Special glow for hammer (yellow) */
+    .glow.hammer {
+      color: #f5d742;
+      text-shadow: 0 0 10px #f5d742, 0 0 20px #f5d742, 0 0 40px #f5d742;
+    }
+
+    /* Green glow */
+    .glow.green {
+      color: #00ff88;
+      text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 40px #00ff88;
+    }
+
+    /* Red glow */
+    .glow.red {
+      color: #ff4444;
+      text-shadow: 0 0 10px #ff4444, 0 0 20px #ff4444, 0 0 40px #ff4444;
+    }
+
+    @keyframes pulse {
+      0% {
+        text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+      }
+      50% {
+        text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
+      }
+      100% {
+        text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
+      }
+    }
+
+    .description {
+      font-size: 20px;
+      margin-top: 20px;
+      color: #ccc;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px;
+    }
+
+    .button {
+      margin-top: 40px;
+      padding: 15px 30px;
+      font-size: 18px;
+      background: #00ff88;
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      animation: pulse 1.5s infinite;
+      box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    /* Status meanings box */
+    .status-meanings {
+      margin-top: 60px;
+      font-size: 18px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #aaa;
+      line-height: 1.5;
+    }
+
+    .status-meanings span {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .status-meanings .hammer {
+      color: #f5d742;
+      text-shadow: 0 0 10px #f5d742;
+    }
+
+    .status-meanings .green {
+      color: #00ff88;
+      text-shadow: 0 0 10px #00ff88;
+    }
+
+    .status-meanings .red {
+      color: #ff4444;
+      text-shadow: 0 0 10px #ff4444;
+    }
+
+    /* Simple notification styling */
+    #notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #222;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00ff88;
+      font-size: 18px;
+      display: none;
+      z-index: 1000;
+    }
+  </style>
 </head>
 <body>
+  <div class="glow hammer">Menu Status: 🔨</div>
 
-<h1>Verdance Mod Menu</h1>
-<button id="downloadBtn">Download Verdance</button>
+  <div class="glow">Verdance Mod Menu</div>
+  <div class="description">
+    Welcome to the official page for <strong>Verdance</strong>, the custom mod menu for Gorilla Tag.<br>
+    Download the latest version below and enjoy powerful tools made for fun and exploration.
+  </div>
 
-<script>
-  document.getElementById('downloadBtn').addEventListener('click', () => {
-    const modLink = "YOUR_MOD_LINK_HERE"; // Replace with your mod URL
+  <a href="YOUR_MOD_LINK_HERE" id="download-link" download>
+    <button class="button">Download Verdance</button>
+  </a>
 
-    if (modLink !== "YOUR_MOD_LINK_HERE" && modLink.trim() !== "") {
-      window.location.href = modLink;
-    } else {
-      alert("Mod link is not set yet.");
+  <div class="status-meanings">
+    <div><span class="hammer">🔨</span> Developing</div>
+    <div><span class="green">🟢</span> Online</div>
+    <div><span class="red">🔴</span> Detected</div>
+  </div>
+
+  <div class="footer" style="margin-top: 80px; font-size: 14px; color: #444;">
+    © 2025 Verdance Team | Not affiliated with Another Axiom or Gorilla Tag
+  </div>
+
+  <div id="notification"></div>
+
+  <script>
+    const downloadLink = document.getElementById('download-link');
+    const notification = document.getElementById('notification');
+
+    downloadLink.addEventListener('click', function(event) {
+      if (downloadLink.href.includes('YOUR_MOD_LINK_HERE')) {
+        event.preventDefault();
+        showNotification('Menu is in development');
+      }
+    });
+
+    function showNotification(message) {
+      notification.textContent = message;
+      notification.style.display = 'block';
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 3000);
     }
-  });
-</script>
-
+  </script>
 </body>
 </html>
