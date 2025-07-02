@@ -113,6 +113,7 @@
 
     /* Notification styles with transform slide */
     #notification {
+      display: none; /* hidden by default */
       position: fixed;
       top: 20px;
       left: 50%;
@@ -129,6 +130,7 @@
     }
 
     #notification.show {
+      display: block;
       transform: translate(-50%, 0);
       pointer-events: auto;
     }
@@ -154,7 +156,7 @@
   </div>
 
   <div class="footer" style="margin-top: 80px; font-size: 14px; color: #444;">
-    © 2025 Verdance Team | Not affiliated with Another Axiom or Gorilla Tag!
+    © 2025 Verdance Team | Not affiliated with Another Axiom or Gorilla Tag
   </div>
 
   <div id="notification"></div>
@@ -175,10 +177,16 @@
     // Function to show notification with slide animation
     function showNotification(message) {
       notification.textContent = message;
+      notification.style.display = 'block';  // make visible immediately
+      // force reflow so animation triggers
+      void notification.offsetWidth;
       notification.classList.add('show');  // slide down visible
 
       setTimeout(() => {
         notification.classList.remove('show'); // slide back up hidden
+        setTimeout(() => {
+          notification.style.display = 'none'; // hide completely after slide up
+        }, 500); // match CSS transition duration
       }, 3000);
     }
 
