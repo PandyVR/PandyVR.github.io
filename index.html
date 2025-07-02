@@ -111,13 +111,14 @@
       text-shadow: 0 0 10px #ff4444;
     }
 
-    /* Notification styles with fade + slide */
+    /* ✅ Fixed Notification: fade + slide */
     #notification {
       position: fixed;
       top: 20px;
       left: 50%;
       transform: translate(-50%, -20px);
       opacity: 0;
+      visibility: hidden;
       background: #222;
       color: white;
       padding: 15px 25px;
@@ -126,15 +127,15 @@
       font-size: 18px;
       z-index: 1000;
       pointer-events: none;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      display: none;
+      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0.5s;
     }
 
     #notification.show {
-      display: block;
       opacity: 1;
       transform: translate(-50%, 0);
+      visibility: visible;
       pointer-events: auto;
+      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s;
     }
   </style>
 </head>
@@ -168,19 +169,15 @@
     const notification = document.getElementById('notification');
     const statusDiv = document.getElementById('status');
 
-    // Unified page load setup
     window.addEventListener('DOMContentLoaded', () => {
-      // Ensure notification is hidden
-      notification.style.display = 'none';
-
-      // Set status
+      // Set initial status
       if (downloadLink.href.includes('YOUR_MOD_LINK_HERE')) {
         setStatus('hammer', 'Menu Status: 🔨');
       } else {
         setStatus('green', 'Menu Status: 🟢');
       }
 
-      // Add click event for notification
+      // Notification click
       downloadLink.addEventListener('click', function (e) {
         if (downloadLink.href.includes('YOUR_MOD_LINK_HERE')) {
           e.preventDefault();
@@ -191,16 +188,11 @@
 
     function showNotification(message) {
       notification.textContent = message;
-      notification.style.display = 'block'; // force display before adding class
-      void notification.offsetWidth; // force reflow
       notification.classList.add('show');
 
       setTimeout(() => {
         notification.classList.remove('show');
-        setTimeout(() => {
-          notification.style.display = 'none';
-        }, 500); // match transition duration
-      }, 3000);
+      }, 3000); // visible for 3s
     }
 
     function setStatus(statusClass, text) {
