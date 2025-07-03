@@ -5,259 +5,138 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Verdance Mod Menu</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      color: white;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      overflow-x: hidden;
-    }
-
-    /* 🔷 Navigation Tabs */
+    /* Basic styles & glow animations */
+    body { margin:0; padding:0; background:#000; color:#fff; font-family:'Arial'; text-align:center; overflow-x:hidden; }
+    @keyframes pulse { 0%,100%{text-shadow:0 0 10px currentColor,0 0 20px currentColor;}50%{text-shadow:0 0 40px currentColor;} }
+    .glow { font-size:54px; margin:30px 0; animation:pulse 1.5s infinite; color:#00ff88; text-shadow:0 0 10px #00ff88, 0 0 20px #00ff88; }
+    .hammer { color:#f5d742 !important; text-shadow:0 0 10px #f5d742, 0 0 20px #f5d742; }
+    .green  { color:#00ff88 !important; text-shadow:0 0 10px #00ff88, 0 0 20px #00ff88; }
+    .red    { color:#ff4444 !important; text-shadow:0 0 10px #ff4444, 0 0 20px #ff4444; }
+    .button { margin-top:20px; padding:15px 30px; font-size:18px; background:#00ff88; color:#000; border:none; border-radius:12px; cursor:pointer; animation:pulse 1.5s infinite; box-shadow:0 0 10px #00ff88; transition:0.3s; }
+    .button:hover { background:#fff; color:#000; }
     .nav-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #111;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      padding: 15px 0;
-      box-shadow: 0 0 10px #00ff88;
-      z-index: 999;
+      position:fixed; top:0; left:0; width:100%; background:#111; display:flex; justify-content:center; gap:30px;
+      padding:15px 0; box-shadow:0 0 10px #00ff88; z-index:999;
     }
-
     .nav-bar a {
-      color: #00ff88;
-      font-size: 18px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s, text-shadow 0.3s;
+      color:#00ff88; font-size:18px; text-decoration:none; font-weight:bold;
+      transition:color .3s,text-shadow .3s;
     }
-
-    .nav-bar a:hover {
-      color: white;
-      text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+    .nav-bar a:hover { color:#fff; text-shadow:0 0 10px #00ff88, 0 0 20px #00ff88; }
+    .description { font-size:20px; margin:20px auto; color:#ccc; max-width:700px; padding:0 20px; }
+    .status-meanings { margin:60px auto; font-size:18px; color:#aaa; max-width:400px; line-height:1.5; }
+    .status-meanings span { font-weight:bold; margin-right:10px; }
+    .status-meanings .hammer, .status-meanings .green, .status-meanings .red {
+      text-shadow:0 0 10px currentColor;
     }
-
-    /* Glow styles */
-    .glow {
-      font-size: 54px;
-      margin-top: 30px;
-      margin-bottom: 20px;
-      animation: pulse 1.5s infinite;
-      color: #00ff88;
-      text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 40px #00ff88;
-    }
-
-    .hammer {
-      color: #f5d742 !important;
-      text-shadow: 0 0 10px #f5d742, 0 0 20px #f5d742, 0 0 40px #f5d742 !important;
-    }
-
-    .green {
-      color: #00ff88 !important;
-      text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88, 0 0 40px #00ff88 !important;
-    }
-
-    .red {
-      color: #ff4444 !important;
-      text-shadow: 0 0 10px #ff4444, 0 0 20px #ff4444, 0 0 40px #ff4444 !important;
-    }
-
-    @keyframes pulse {
-      0% {
-        text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
-      }
-      50% {
-        text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
-      }
-      100% {
-        text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
-      }
-    }
-
-    .description {
-      font-size: 20px;
-      margin-top: 20px;
-      color: #ccc;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 0 20px;
-    }
-
-    .button {
-      margin-top: 40px;
-      padding: 15px 30px;
-      font-size: 18px;
-      background: #00ff88;
-      color: #000;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      animation: pulse 1.5s infinite;
-      box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
-      transition: 0.3s;
-    }
-
-    .button:hover {
-      background: #fff;
-      color: #000;
-    }
-
-    .status-meanings {
-      margin-top: 60px;
-      font-size: 18px;
-      max-width: 400px;
-      margin-left: auto;
-      margin-right: auto;
-      color: #aaa;
-      line-height: 1.5;
-    }
-
-    .status-meanings span {
-      font-weight: bold;
-      margin-right: 10px;
-    }
-
-    .status-meanings .hammer {
-      color: #f5d742;
-      text-shadow: 0 0 10px #f5d742;
-    }
-
-    .status-meanings .green {
-      color: #00ff88;
-      text-shadow: 0 0 10px #00ff88;
-    }
-
-    .status-meanings .red {
-      color: #ff4444;
-      text-shadow: 0 0 10px #ff4444;
-    }
-
-    /* Notification styles */
     #notification {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translate(-50%, -20px);
-      opacity: 0;
-      visibility: hidden;
-      background: #222;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px #00ff88;
-      font-size: 18px;
-      z-index: 1000;
-      pointer-events: none;
-      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0.5s;
+      position:fixed; top:20px; left:50%; transform:translate(-50%,-20px); opacity:0; visibility:hidden;
+      background:#222; color:#fff; padding:15px 25px; border-radius:8px; box-shadow:0 0 10px #00ff88;
+      font-size:18px; z-index:1000; pointer-events:none;
+      transition:opacity .5s ease, transform .5s ease, visibility 0s linear .5s;
     }
-
     #notification.show {
-      opacity: 1;
-      transform: translate(-50%, 0);
-      visibility: visible;
-      pointer-events: auto;
-      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s;
+      opacity:1; transform:translate(-50%,0); visibility:visible; pointer-events:auto;
+      transition:opacity .5s ease, transform .5s ease, visibility 0s;
     }
   </style>
 </head>
 <body>
-  <!-- 🔷 Navigation Tabs -->
   <div class="nav-bar">
     <a href="#faq">FAQ</a>
     <a href="#purchase">Purchase</a>
-    <a href="https://discord.gg/YOUR_INVITE_HERE" target="_blank">Discord</a>
+    <a href="#media">Media</a>
+    <a href="#changelog">Changelog</a>
+    <a href="https://discord.gg/mNzVJdEdTS" target="_blank">Discord</a>
   </div>
+  <div style="margin-top:80px;"></div>
 
-  <!-- Spacer for nav -->
-  <div style="margin-top: 80px;"></div>
-
-  <!-- Status -->
   <div id="status" class="glow hammer">Menu Status: 🔨</div>
-
-  <!-- Title -->
   <div class="glow">Verdance Mod Menu</div>
-
-  <!-- Description -->
   <div class="description">
-    Welcome to the official page for <strong>Verdance</strong>, the custom mod menu for Gorilla Tag.<br />
+    Welcome to the official page for <strong>Verdance</strong>, the custom mod menu for Gorilla Tag.
     Download the latest version below and enjoy powerful tools made for fun and exploration.
   </div>
+  <a href="YOUR_MOD_LINK_HERE" id="download-link" download><button class="button">Download Verdance</button></a>
 
-  <!-- Download Button -->
-  <a href="YOUR_MOD_LINK_HERE" id="download-link" download>
-    <button class="button">Download Verdance</button>
-  </a>
-
-  <!-- Status Meanings -->
   <div class="status-meanings">
     <div><span class="hammer">🔨</span> Developing</div>
     <div><span class="green">🟢</span> Online</div>
     <div><span class="red">🔴</span> Detected</div>
   </div>
 
-  <!-- FAQ Section -->
-  <div id="faq" style="margin-top: 100px; padding-top: 100px;">
+  <!-- FAQ -->
+  <div id="faq" style="margin-top:100px;padding-top:100px;">
     <h2 class="glow">FAQ</h2>
-    <p class="description">Coming soon... Got questions? Ask in our Discord server!</p>
+    <p class="description">Coming soon—join our Discord for questions and support!</p>
   </div>
 
-  <!-- ✅ Purchase Section with Button -->
-  <div id="purchase" style="margin-top: 100px; padding-top: 100px;">
+  <!-- Purchase -->
+  <div id="purchase" style="margin-top:100px;padding-top:100px;">
     <h2 class="glow">Purchase</h2>
     <p class="description">Support the Verdance project by purchasing access below:</p>
-    <a href="https://www.roblox.com/game-pass/1258250867/Verdance" target="_blank">
-      <button class="button" style="margin-top: 20px;">Purchase on Roblox</button>
+    <a href="https://www.roblox.com/game-pass/1258250867/Verdance" id="purchase-link" target="_blank">
+      <button class="button">Purchase on Roblox</button>
     </a>
   </div>
 
-  <!-- Footer -->
-  <div class="footer" style="margin-top: 80px; font-size: 14px; color: #444;">
-    © 2025 Verdance Team | Not affiliated with Another Axiom or Gorilla Tag
+  <!-- Media -->
+  <div id="media" style="margin-top:100px;padding-top:100px;">
+    <h2 class="glow">Media</h2>
+    <div class="description">Check out screenshots and gameplay videos:</div>
+    <!-- Example media embed -->
+    <img src="https://via.placeholder.com/600x300" alt="Verdance Screenshot" style="max-width:90%;margin:20px 0;border:2px solid #00ff88;">
+    <div style="max-width:600px; margin: auto;">
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/VIDEO_ID" 
+        title="Verdance Demo" frameborder="0" allowfullscreen></iframe>
+    </div>
   </div>
 
-  <!-- Notification -->
+  <!-- Changelog -->
+  <div id="changelog" style="margin-top:100px;padding-top:100px;">
+    <h2 class="glow">Changelog</h2>
+    <div class="description" style="text-align:left; max-width:600px; margin:auto;">
+      <ul>
+        <li><strong>v1.0</strong> – Coming Soon!</li>
+        <li><strong>v1.1</strong> – Coming Soon!</li>
+        <li><strong>v1.2</strong> – Coming Soon!</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer" style="margin-top:80px;font-size:14px;color:#444;">
+    © 2025 Verdance Team | Not affiliated with Another Axiom or Gorilla Tag
+  </div>
   <div id="notification"></div>
 
-  <!-- Script -->
   <script>
     const downloadLink = document.getElementById('download-link');
+    const purchaseLink = document.getElementById('purchase-link');
     const notification = document.getElementById('notification');
     const statusDiv = document.getElementById('status');
 
     window.addEventListener('DOMContentLoaded', () => {
-      if (downloadLink.href.includes('YOUR_MOD_LINK_HERE')) {
-        setStatus('hammer', 'Menu Status: 🔨');
-      } else {
-        setStatus('green', 'Menu Status: 🟢');
-      }
+      if (downloadLink.href.includes('YOUR_MOD_LINK_HERE'))
+        setStatus('hammer','Menu Status: 🔨');
+      else setStatus('green','Menu Status: 🟢');
 
-      downloadLink.addEventListener('click', function (e) {
+      downloadLink.addEventListener('click', e => {
         if (downloadLink.href.includes('YOUR_MOD_LINK_HERE')) {
-          e.preventDefault();
-          showNotification('Menu is in development');
+          e.preventDefault(); showNotification('Menu is in development');
         }
+      });
+
+      purchaseLink.addEventListener('click', () => {
+        fetch('https://pandyvr.pythonanywhere.com/notify-purchase', { method: 'POST' }).catch(console.error);
       });
     });
 
-    function showNotification(message) {
-      notification.textContent = message;
+    function showNotification(msg) {
+      notification.textContent = msg;
       notification.classList.add('show');
-      setTimeout(() => {
-        notification.classList.remove('show');
-      }, 3000);
+      setTimeout(() => notification.classList.remove('show'),3000);
     }
-
-    function setStatus(statusClass, text) {
-      statusDiv.className = 'glow ' + statusClass;
-      statusDiv.textContent = text;
-    }
+    function setStatus(cls, txt) { statusDiv.className = 'glow '+ cls; statusDiv.textContent = txt; }
   </script>
 </body>
 </html>
