@@ -126,10 +126,14 @@
         }
       });
 
-      purchaseLink.addEventListener('click', () => {
-        fetch('https://pandyvr.pythonanywhere.com/notify-purchase', { method: 'POST' }).catch(console.error);
-      });
-    });
+      const purchaseLink = document.getElementById('purchase-link');
+
+purchaseLink.addEventListener('click', () => {
+  fetch('https://pandyvr.pythonanywhere.com/notify-purchase', {
+    method: 'POST'
+  });
+});
+
 
     function showNotification(msg) {
       notification.textContent = msg;
